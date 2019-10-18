@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../shared/db');
+const formidable = require('formidable');
 
+
+//Ajout d'un livre à la BD et création du lien user book dans la table posseder
 router.post('/:id', (req, res) => {
     const sql = "INSERT INTO books SET ?";
     const insertData = {
         bookTitle: req.body.bookTitle,
-        nbPage: 5,
+        nbPage: req.body.file.length,
         creationDate: req.body.creationDate,
         dimensionW: 100,
         dimensionH: 100,
@@ -25,7 +28,6 @@ router.post('/:id', (req, res) => {
                 idBook: results.insertId,
                 idUser: idUser
             }
-            console.log(linkBookToUser);
             db.query('INSERT INTO posseder SET ?', linkBookToUser,
                 (err) => {
                     if (err) {
