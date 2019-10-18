@@ -140,11 +140,10 @@ router.put('/:id', (req, res) => {
         req.body.userName,
         req.body.userFirstname,
         req.body.email,
-        req.body.mdp,
         req.body.idRight,
         req.params.id
     ];
-    const sql = `UPDATE users SET userName=?, userFirstname=?, email=?, password=?, idRight=? WHERE id=?;`;
+    const sql = `UPDATE users SET userName=?, userFirstname=?, email=?, idRight=? WHERE id=?;`;
 
     dbConnextion.query(sql, updateData, (err) => {
         if (err) {

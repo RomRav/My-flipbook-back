@@ -38,5 +38,18 @@ router.post('/:id', (req, res) => {
     });
 });
 
+//requet liste des types de couverture
+router.get('/coverTypes', (req, res) => {
+    const sql = 'SELECT * from coverstypes';
+    db.query(sql, (err, rows) => {
+        if (err) {
+            res.json({ erreur: err });
+        } else {
+            res.json({ covers: rows });
+        }
+    });
+});
+
+
 
 module.exports = router;
